@@ -1898,3 +1898,51 @@ Disassembly of section .fini:
  804a258:	83 c4 08             	add    $0x8,%esp
  804a25b:	5b                   	pop    %ebx
  804a25c:	c3                   	ret    
+
+
+
+|   0x804920c <getbufn>             push   %ebp                                                                                                                                                              │
+│   0x804920d <getbufn+1>           mov    %esp,%ebp                                                                                                                                                         │
+│   0x804920f <getbufn+3>           sub    $0x218,%esp                                                                                                                                                       │
+│B+>0x8049215 <getbufn+9>           lea    -0x208(%ebp),%eax                                                                                                                                                 │
+│   0x804921b <getbufn+15>          mov    %eax,(%esp)                                                                                                                                                       │
+│   0x804921e <getbufn+18>          call   0x8048cfa <Gets>                                                                                                                                                  │
+│   0x8049223 <getbufn+23>          mov    $0x1,%eax                                                                                                                                                         │
+│   0x8049228 <getbufn+28>          leave                                                                                                                                                                    │
+│   0x8049229 <getbufn+29>          ret                                                                                                                                                                      │
+
+
+
+|   0x8048e26 <testn>       push   %ebp                                                                                                                                                                      │
+│   0x8048e27 <testn+1>     mov    %esp,%ebp                                                                                                                                                                 │
+│   0x8048e29 <testn+3>     push   %ebx                                                                                                                                                                      │
+│B+>0x8048e2a <testn+4>     sub    $0x24,%esp                                                                                                                                                                │
+│   0x8048e2d <testn+7>     call   0x8048d90 <uniqueval>                                                                                                                                                     │
+│   0x8048e32 <testn+12>    mov    %eax,-0xc(%ebp)                                                                                                                                                           │
+│   0x8048e35 <testn+15>    call   0x804920c <getbufn>                                                                                                                                                       │
+│   0x8048e3a <testn+20>    mov    %eax,%ebx                                                                                                                                                                 │
+│   0x8048e3c <testn+22>    call   0x8048d90 <uniqueval>                                                                                                                                                     │
+│   0x8048e41 <testn+27>    mov    -0xc(%ebp),%edx                                                                                                                                                           │
+│   0x8048e44 <testn+30>    cmp    %edx,%eax                                                                                                                                                                 │
+│   0x8048e46 <testn+32>    je     0x8048e56 <testn+48>                                                                                                                                                      │
+│   0x8048e48 <testn+34>    movl   $0x804a388,(%esp)                                                                                                                                                         │
+│   0x8048e4f <testn+41>    call   0x80488c0 <puts@plt>                                                                                                                                                      │
+│   0x8048e54 <testn+46>    jmp    0x8048e9c <testn+118>                                                                                                                                                     │
+│   0x8048e56 <testn+48>    cmp    0x804d108,%ebx                                                                                                                                                            │
+│   0x8048e5c <testn+54>    jne    0x8048e84 <testn+94>                                                                                                                                                      │
+│   0x8048e5e <testn+56>    mov    %ebx,0x8(%esp)                                                                                                                                                            │
+│   0x8048e62 <testn+60>    movl   $0x804a3b4,0x4(%esp)                                                                                                                                                      │
+│   0x8048e6a <testn+68>    movl   $0x1,(%esp)                                                                                                                                                               │
+│   0x8048e71 <testn+75>    call   0x80489c0 <__printf_chk@plt>                                                                                                                                              │
+│   0x8048e76 <testn+80>    movl   $0x4,(%esp)                                                                                                                                                               │
+│   0x8048e7d <testn+87>    call   0x804937b <validate>                                                                                                                                                      │
+│   0x8048e82 <testn+92>    jmp    0x8048e9c <testn+118>                                                                                                                                                     │
+│   0x8048e84 <testn+94>    mov    %ebx,0x8(%esp)                                                                                                                                                            │
+│   0x8048e88 <testn+98>    movl   $0x804a562,0x4(%esp)                                                                                                                                                      │
+│   0x8048e90 <testn+106>   movl   $0x1,(%esp)                                                                                                                                                               │
+│   0x8048e97 <testn+113>   call   0x80489c0 <__printf_chk@plt>                                                                                                                                              │
+│   0x8048e9c <testn+118>   add    $0x24,%esp                                                                                                                                                                │
+│   0x8048e9f <testn+121>   pop    %ebx                                                                                                                                                                      │
+│   0x8048ea0 <testn+122>   pop    %ebp                                                                                                                                                                      │
+│   0x8048ea1 <testn+123>   ret                                                                                                                                                                              │
+│   0x8048ea2 <launch>      push   %ebp  
