@@ -51,7 +51,7 @@ typedef cacheLine *cacheSet;
 typedef cacheSet *cache;
 
 int lru_cnt = 0;
-cache *my_cache = NULL;
+cache my_cache = NULL;
 
 int visitCache(uint64_t address) {
     lru_cnt++;
@@ -59,19 +59,20 @@ int visitCache(uint64_t address) {
     uint32_t setIndex = address >> b & ((1 << s) - 1);
     int hit = 0, miss = 1, evict = 0;
     for (int i = 0; i < E; i++) {
-        if (my_cache[setIndex][i]->valid && my_cache[setIndex][i]->tag == tag) {
+        if (my_cache[setIndex][i].valid && my_cache[setIndex][i].tag == tag) {
             hit = 1;
-            my_cache[setIndex][i]->lru = lru_cnt;
+            my_cache[setIndex][i].lru = lru_cnt;
             break;
         }
     }
-    if (hit) miss = 0;
-    if (miss) {
+    if (hit) miss = evict = 0;
+    else {
         int ok = 0;
         for (int i = 0; i < E; i++) {
-            if (!my_cache[setIndex][i]->valid) {
-                my_cache[setIndex][i]->lru = lru_cnt;
-                my_cache[setIndex][i]->tag = tag;
+            if (!my_cache[setIndex][i].valid) { // not set
+                my_cache[setIndex][i].lru = lru_cnt;
+                my_cache[setIndex][i].tag = tag;
+                my_cache[setIndex][i].valid = 1;
                 ok = 1;
                 break;
             }
@@ -79,23 +80,28 @@ int visitCache(uint64_t address) {
         if (!ok) {
             int id = 0, min_lru = 1e9;
             for (int i = 0; i < E; i++) {
-                if (my_cache[setIndex][i]->lru <= min_lru) {
-                    min_lru = my_cache[setIndex][i]->lru;
+                if (my_cache[setIndex][i].lru <= min_lru) {
+                    min_lru = my_cache[setIndex][i].lru;
                     id = i;
                 }
             }
-            my_cache[setIndex][id]->lru = lru_cnt;
-            my_cache[setIndex][id]->tag = tag;
+            my_cache[setIndex][id].lru = lru_cnt;
+            my_cache[setIndex][id].tag = tag;
+            my_cache[setIndex][id].valid = 1;
             evict = 1;
         }
     }
+    hits += hit;
+    misses += miss;
+    evictions += evict;
     if (hit) return 0;
-    return miss + evict;
+    if (evict) return 2;
+    else return 1;
 }
 
 void simulate() {
     // TODO: malloc
-    int B = 1 << b, S = 1 << s;
+    int S = 1 << s;
     uint64_t address;
     int sz, ret;
     char buf[20], op;
@@ -105,17 +111,18 @@ void simulate() {
         my_cache[i] = (cacheSet) malloc(sizeof(cacheLine) * E);
     for (int i = 0; i < S; i++)
         for (int j = 0; j < E; j++)
-            my_cache[i][j]->lru = 0;
+            my_cache[i][j].valid = 0;
 
     while (fgets(buf, sizeof(buf), fp) != NULL) {
         if (buf[0] == 'I') continue;
-        sscanf(" %c %lx,%d\n", op, &address, &sz);
+        sscanf(buf, " %c %lx,%d\n", &op, &address, &sz);
         switch (op) {
             case 'S':
                 ret = visitCache(address);
                 break;
             case 'M':
                 ret = visitCache(address);
+                hits++;
                 break;
             case 'L':
                 ret = visitCache(address);
@@ -125,11 +132,17 @@ void simulate() {
         }
         if (verbose) {
             if (ret == 0) {
-                printf("%c %lx,%d hit\n",op,address,sz);
+                printf("%c %lx,%d hit\n", op, address, sz);
             } else if (ret == 1) {
-                printf("%c %lx,%d miss\n",op,address,sz);
+                if (op == 'M')
+                    printf("%c %lx,%d miss hit\n", op, address, sz);
+                else
+                    printf("%c %lx,%d miss\n", op, address, sz);
             } else {
-                printf("%c %lx,%d eviction\n",op,address,sz);
+                if (op == 'M')
+                    printf("%c %lx,%d miss eviction hit\n", op, address, sz);
+                else
+                    printf("%c %lx,%d miss eviction\n", op, address, sz);
             }
         }
     }
@@ -142,6 +155,6 @@ void simulate() {
 int main(int argc, char **argv) {
     parseArgument(argc, argv);
     simulate();
-    printSummary(0, 0, 0);
+    printSummary(hits, misses, evictions);
     return 0;
 }
