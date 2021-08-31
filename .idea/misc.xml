@@ -4,17 +4,17 @@
   <component name="MakefileSettings">
     <option name="linkedExternalProjectsSettings">
       <MakefileProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/lab/cache" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/lab/performance" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/lab/cache" />
+            <option value="$PROJECT_DIR$/lab/performance" />
           </set>
         </option>
         <option name="version" value="2" />
       </MakefileProjectSettings>
     </option>
   </component>
-  <component name="MakefileWorkspace" PROJECT_DIR="$PROJECT_DIR$/lab/cache">
+  <component name="MakefileWorkspace" PROJECT_DIR="$PROJECT_DIR$/lab/performance">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
 </project>
