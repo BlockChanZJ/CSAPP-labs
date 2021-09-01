@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "defs.h"
 
 /* 
@@ -451,6 +452,7 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
     accumulate_sum(&sum[0][0], src[RIDX(1, 0, dim)]);
     accumulate_sum(&sum[0][0], src[RIDX(1, 1, dim)]);
     assign_sum_to_pixel(&dst[RIDX(0, 0, dim)], sum[0][0]);
+    //assert(sum[0][0].num == 4);
 
     // right-down [dim-1, dim-1]
     accumulate_sum(&sum[dim - 1][dim - 1], src[RIDX(dim - 2, dim - 2, dim)]);
@@ -458,18 +460,30 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
     accumulate_sum(&sum[dim - 1][dim - 1], src[RIDX(dim - 2, dim - 1, dim)]);
     accumulate_sum(&sum[dim - 1][dim - 1], src[RIDX(dim - 1, dim - 1, dim)]);
     assign_sum_to_pixel(&dst[RIDX(dim - 1, dim - 1, dim)], sum[dim - 1][dim - 1]);
+    //assert(sum[dim - 1][dim - 1].num == 4);
 
     // [0, 1]
     sum[0][1] = sum[0][0];
     accumulate_sum(&sum[0][1], src[RIDX(0, 2, dim)]);
     accumulate_sum(&sum[0][1], src[RIDX(1, 2, dim)]);
     assign_sum_to_pixel(&dst[RIDX(0, 1, dim)], sum[0][1]);
+    //assert(sum[0][1].num == 6);
 
     // [1, 0]
     sum[1][0] = sum[0][0];
     accumulate_sum(&sum[1][0], src[RIDX(2, 0, dim)]);
     accumulate_sum(&sum[1][0], src[RIDX(2, 1, dim)]);
     assign_sum_to_pixel(&dst[RIDX(1, 0, dim)], sum[1][0]);
+    //assert(sum[1][0].num == 6);
+
+    // [1, 1]
+    sum[1][1] = sum[0][1];
+    accumulate_sum(&sum[1][1], src[RIDX(2, 0, dim)]);
+    accumulate_sum(&sum[1][1], src[RIDX(2, 1, dim)]);
+    accumulate_sum(&sum[1][1], src[RIDX(2, 2, dim)]);
+    assign_sum_to_pixel(&dst[RIDX(1, 1, dim)], sum[1][1]);
+    //assert(sum[1][1].num == 9);
+
 
     // top [0, 2] ==> [0, dim-2]
     for (i = 2; i < dim - 1; i++) {
@@ -479,13 +493,8 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
         subtract_sum(&sum[0][i], src[RIDX(0, i - 2, dim)]);
         subtract_sum(&sum[0][i], src[RIDX(1, i - 2, dim)]);
         assign_sum_to_pixel(&dst[RIDX(0, i, dim)], sum[0][i]);
+        //assert(sum[0][i].num == 6);
     }
-
-    // top-right [0, dim-1]
-    sum[0][dim - 1] = sum[0][dim - 2];
-    subtract_sum(&sum[0][dim - 1], src[RIDX(0, dim - 3, dim)]);
-    subtract_sum(&sum[0][dim - 1], src[RIDX(1, dim - 3, dim)]);
-    assign_sum_to_pixel(&dst[RIDX(0, dim - 1, dim)], sum[0][dim - 1]);
 
     // left [2, 0] ==> [dim-2, 0]
     for (i = 2; i < dim - 1; i++) {
@@ -495,17 +504,59 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
         subtract_sum(&sum[i][0], src[RIDX(i - 2, 0, dim)]);
         subtract_sum(&sum[i][0], src[RIDX(i - 2, 1, dim)]);
         assign_sum_to_pixel(&dst[RIDX(i, 0, dim)], sum[i][0]);
+        //assert(sum[i][0].num == 6);
     }
+
+    // [1, 2] -> [1, dim-2]
+    for (i = 2; i < dim - 1; i++) {
+        sum[1][i] = sum[1][i - 1];
+        accumulate_sum(&sum[1][i], src[RIDX(0, i + 1, dim)]);
+        accumulate_sum(&sum[1][i], src[RIDX(1, i + 1, dim)]);
+        accumulate_sum(&sum[1][i], src[RIDX(2, i + 1, dim)]);
+        subtract_sum(&sum[1][i], src[RIDX(0, i - 2, dim)]);
+        subtract_sum(&sum[1][i], src[RIDX(1, i - 2, dim)]);
+        subtract_sum(&sum[1][i], src[RIDX(2, i - 2, dim)]);
+        assign_sum_to_pixel(&dst[RIDX(1, i, dim)], sum[1][i]);
+        //assert(sum[1][i].num == 9);
+    }
+
+    // [2, 1] -> [dim-2, 1]
+    for (i = 2; i < dim - 1; i++) {
+        sum[i][1] = sum[i - 1][1];
+        accumulate_sum(&sum[i][1], src[RIDX(i + 1, 0, dim)]);
+        accumulate_sum(&sum[i][1], src[RIDX(i + 1, 1, dim)]);
+        accumulate_sum(&sum[i][1], src[RIDX(i + 1, 2, dim)]);
+        subtract_sum(&sum[i][1], src[RIDX(i - 2, 0, dim)]);
+        subtract_sum(&sum[i][1], src[RIDX(i - 2, 1, dim)]);
+        subtract_sum(&sum[i][1], src[RIDX(i - 2, 2, dim)]);
+        assign_sum_to_pixel(&dst[RIDX(i, 1, dim)], sum[i][1]);
+        //assert(sum[i][1].num == 9);
+    }
+
+    // top-right [0, dim-1]
+    sum[0][dim - 1] = sum[0][dim - 2];
+    subtract_sum(&sum[0][dim - 1], src[RIDX(0, dim - 3, dim)]);
+    subtract_sum(&sum[0][dim - 1], src[RIDX(1, dim - 3, dim)]);
+    assign_sum_to_pixel(&dst[RIDX(0, dim - 1, dim)], sum[0][dim - 1]);
+    //assert(sum[0][dim - 1].num == 4);
 
     // left-down [dim-1, 0]
     sum[dim - 1][0] = sum[dim - 2][0];
     subtract_sum(&sum[dim - 1][0], src[RIDX(dim - 3, 0, dim)]);
     subtract_sum(&sum[dim - 1][0], src[RIDX(dim - 3, 1, dim)]);
     assign_sum_to_pixel(&dst[RIDX(dim - 1, 0, dim)], sum[dim - 1][0]);
+    //assert(sum[dim - 1][0].num == 4);
 
-    // middle [1, 1] ==> [dim-2, dim-2]
-    for (i = 1; i < dim - 1; i++) {
-        for (j = 1; j < dim - 1; j++) {
+    // [dim-1, 1]
+//    sum[dim - 1][1] = sum[dim - 1][0];
+//    accumulate_sum(&sum[dim - 1][1], src[RIDX(dim - 2, 2, dim)]);
+//    accumulate_sum(&sum[dim - 1][1], src[RIDX(dim - 1, 2, dim)]);
+//    //assert(sum[dim - 1][1].num == 6);
+    dst[RIDX(dim - 1, 1, dim)] = avg(dim, dim - 1, 1, src);
+
+    // middle [2, 2] ==> [dim-2, dim-2]
+    for (i = 2; i < dim - 1; i++) {
+        for (j = 2; j < dim - 1; j++) {
             sum[i][j] = sum[i - 1][j];
             accumulate_sum(&sum[i][j], src[RIDX(i + 1, j - 1, dim)]);
             accumulate_sum(&sum[i][j], src[RIDX(i + 1, j, dim)]);
@@ -514,27 +565,28 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
             subtract_sum(&sum[i][j], src[RIDX(i - 2, j, dim)]);
             subtract_sum(&sum[i][j], src[RIDX(i - 2, j + 1, dim)]);
             assign_sum_to_pixel(&dst[RIDX(i, j, dim)], sum[i][j]);
+            //assert(sum[i][j].num == 9);
         }
     }
 
-    // [dim-1, 1]
-    sum[dim - 1][1] = sum[dim][0];
-    accumulate_sum(&sum[dim - 1][1], src[RIDX(dim - 2, 2, dim)]);
-    accumulate_sum(&sum[dim - 1][1], src[RIDX(dim - 1, 2, dim)]);
+
 
     // down [dim-1, 2] ==> [dim-1, dim-2]
     for (i = 2; i < dim - 1; i++) {
-        sum[dim - 1][i] = sum[dim - 1][i - 1];
+        sum[dim - 1][i] = sum[dim - 2][i];
         subtract_sum(&sum[dim - 1][i], src[RIDX(dim - 3, i - 1, dim)]);
         subtract_sum(&sum[dim - 1][i], src[RIDX(dim - 3, i, dim)]);
         subtract_sum(&sum[dim - 1][i], src[RIDX(dim - 3, i + 1, dim)]);
         assign_sum_to_pixel(&dst[RIDX(dim - 1, i, dim)], sum[dim - 1][i]);
+        //assert(sum[dim - 1][i].num == 6);
     }
 
-    // [dim-1, 1]
-    sum[1][dim - 1] = sum[0][dim - 1];
-    accumulate_sum(&sum[1][dim - 1], src[RIDX(2, dim - 2, dim)]);
-    accumulate_sum(&sum[1][dim - 1], src[RIDX(2, dim - 1, dim)]);
+    // [1, dim-1]
+//    sum[1][dim - 1] = sum[0][dim - 1];
+//    accumulate_sum(&sum[1][dim - 1], src[RIDX(2, dim - 1, dim)]);
+//    accumulate_sum(&sum[1][dim - 1], src[RIDX(2, dim - 2, dim)]);
+//    //assert(sum[1][dim - 1].num == 6);
+    dst[RIDX(1, dim - 1, dim)] = avg(dim, 1, dim - 1, src);
 
     // right [2, dim-1] ==> [dim-2, dim-1]
     for (i = 2; i < dim - 1; i++) {
@@ -543,9 +595,8 @@ void dynamic_programming_smooth(int dim, pixel *src, pixel *dst) {
         subtract_sum(&sum[i][dim - 1], src[RIDX(i, dim - 3, dim)]);
         subtract_sum(&sum[i][dim - 1], src[RIDX(i + 1, dim - 3, dim)]);
         assign_sum_to_pixel(&dst[RIDX(i, dim - 1, dim)], sum[i][dim - 1]);
+        //assert(sum[i][dim - 1].num == 6);
     }
-
-
 }
 
 char smooth_descr[] = "smooth: Current working version";
