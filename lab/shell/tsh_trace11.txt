@@ -1,0 +1,6 @@
+#
+# trace11.txt - Forward SIGINT to every process in foreground process group
+#
+tsh> tsh> ./mysplit 4
+tsh> Job [0] (124776) terminated by signal 2
+[sigint_handler] delete job error

@@ -1,0 +1,7 @@
+5,6c5,6
+< tsh> Job [0] (124695) terminated by signal 2
+< [sigint_handler] delete job error
+---
+> tsh> Job [1] (124691) terminated by signal 2
+> tsh> 
+\ 文件尾没有换行符

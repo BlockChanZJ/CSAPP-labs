@@ -1,0 +1,5 @@
+#
+# trace13.txt - Restart every stopped process in process group
+#
+tsh> tsh> ./mysplit 4
+tsh> 

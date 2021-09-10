@@ -1,0 +1,66 @@
+5,6c5,65
+< tsh> Job [0] (124776) terminated by signal 2
+< [sigint_handler] delete job error
+---
+> tsh> Job [1] (124770) terminated by signal 2
+> tsh> tsh> /bin/ps a
+> tsh>     PID TTY      STAT   TIME COMMAND
+>    1159 tty1     Ssl+   0:00 /usr/lib/gdm3/gdm-x-session dbus-run-session -- gnome-session --autostart /usr/share/gdm/greeter/autostart
+>    1161 tty1     Sl+    0:02 /usr/lib/xorg/Xorg vt1 -displayfd 3 -auth /run/user/121/gdm/Xauthority -background none -noreset -keeptty -verbose 3
+>    1311 tty1     S+     0:00 dbus-run-session -- gnome-session --autostart /usr/share/gdm/greeter/autostart
+>    1312 tty1     S+     0:00 dbus-daemon --nofork --print-address 4 --session
+>    1314 tty1     Sl+    0:00 /usr/libexec/gnome-session-binary --systemd --autostart /usr/share/gdm/greeter/autostart
+>    1321 tty1     Sl+    0:00 /usr/libexec/at-spi-bus-launcher
+>    1326 tty1     S+     0:00 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+>    1348 tty1     Sl+    0:21 /usr/bin/gnome-shell
+>    1373 tty1     Sl     0:00 ibus-daemon --panel disable --xim
+>    1376 tty1     Sl     0:00 /usr/libexec/ibus-dconf
+>    1379 tty1     Sl     0:00 /usr/libexec/ibus-x11 --kill-daemon
+>    1381 tty1     Sl+    0:00 /usr/libexec/ibus-portal
+>    1391 tty1     Sl+    0:00 /usr/libexec/at-spi2-registryd --use-gnome-session
+>    1396 tty1     Sl+    0:00 /usr/libexec/xdg-permission-store
+>    1411 tty1     Sl+    0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+>    1426 tty1     Sl+    0:00 /usr/libexec/gsd-sharing
+>    1428 tty1     Sl+    0:00 /usr/libexec/gsd-wacom
+>    1429 tty1     Sl+    0:00 /usr/libexec/gsd-color
+>    1430 tty1     Sl+    0:00 /usr/libexec/gsd-keyboard
+>    1431 tty1     Sl+    0:00 /usr/libexec/gsd-print-notifications
+>    1432 tty1     Sl+    0:00 /usr/libexec/gsd-rfkill
+>    1433 tty1     Sl+    0:00 /usr/libexec/gsd-smartcard
+>    1434 tty1     Sl+    0:00 /usr/libexec/gsd-datetime
+>    1435 tty1     Sl+    0:00 /usr/libexec/gsd-media-keys
+>    1436 tty1     Sl+    0:00 /usr/libexec/gsd-screensaver-proxy
+>    1437 tty1     Sl     0:00 /usr/libexec/ibus-engine-simple
+>    1438 tty1     Sl+    0:00 /usr/libexec/gsd-sound
+>    1439 tty1     Sl+    0:00 /usr/libexec/gsd-a11y-settings
+>    1440 tty1     Sl+    0:03 /usr/libexec/gsd-housekeeping
+>    1441 tty1     Sl+    0:00 /usr/libexec/gsd-power
+>    1514 tty1     Sl+    0:00 /usr/libexec/gsd-printer
+>    1683 tty2     Ssl+   0:00 /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+>    1685 tty2     Sl+   27:50 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose 3
+>    1694 tty2     Sl+    0:00 /usr/libexec/gnome-session-binary --systemd --systemd --session=ubuntu
+>    1775 tty2     Z+     0:00 [fcitx] <defunct>
+>   30094 tty1     Sl+    0:00 /usr/libexec/dconf-service
+>   41009 pts/2    Ss     0:03 zsh
+>   41014 pts/2    S      0:00 zsh
+>   41040 pts/2    S      0:00 zsh
+>   41042 pts/2    Sl     0:01 /home/blockchanzj/.cache/gitstatus/gitstatusd-linux-x86_64 -G v1.0.0 -s -1 -u -1 -d -1 -c -1 -m -1 -v FATAL -t 12
+>   41043 pts/2    S      0:00 zsh
+>  105080 pts/2    Rl+  578:53 python3 text_classification.py --DS R8 --pooling entropy --batch-size 8 --lr 0.001 --epochs 500
+>  106804 pts/4    Ss     0:03 zsh
+>  106809 pts/4    S      0:00 zsh
+>  106835 pts/4    S      0:00 zsh
+>  106837 pts/4    S      0:00 zsh
+>  106838 pts/4    Sl     0:00 /home/blockchanzj/.cache/gitstatus/gitstatusd-linux-x86_64 -G v1.0.0 -s -1 -u -1 -d -1 -c -1 -m -1 -v FATAL -t 12
+>  115869 pts/0    Ss     0:08 zsh
+>  115874 pts/0    S      0:00 zsh
+>  115901 pts/0    S      0:00 zsh
+>  115902 pts/0    S      0:00 zsh
+>  115904 pts/0    Sl     0:00 /home/blockchanzj/.cache/gitstatus/gitstatusd-linux-x86_64 -G v1.0.0 -s -1 -u -1 -d -1 -c -1 -m -1 -v FATAL -t 12
+>  117080 pts/4    S+     0:00 ssh linux0
+>  124649 pts/0    S+     0:00 /bin/bash ./test.sh
+>  124767 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace11.txt -s ./tshref
+>  124768 pts/0    S+     0:00 ./tshref
+>  124774 pts/0    R      0:00 /bin/ps a
+> tsh> 
+\ 文件尾没有换行符

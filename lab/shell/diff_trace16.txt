@@ -1,0 +1,13 @@
+6,8c6,11
+< tsh> kill (tstp) errortsh> tsh> jobs
+< tsh> tsh> tsh> ./myint 2
+< tsh> tsh> 
+\ 文件尾没有换行符
+---
+> tsh> Job [1] (124876) stopped by signal 20
+> tsh> tsh> jobs
+> tsh> [1] (124876) Stopped ./mystop 2
+> tsh> tsh> ./myint 2
+> tsh> Job [2] (124879) terminated by signal 2
+> tsh> 
+\ 文件尾没有换行符

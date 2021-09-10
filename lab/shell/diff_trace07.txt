@@ -1,0 +1,14 @@
+5,6c5
+< tsh> [1] (124710) ./myspin 4 &
+< 
+---
+> tsh> [1] (124702) ./myspin 4 &
+8,9c7,10
+< tsh> Job [0] (124708) terminated by signal 2
+< [sigint_handler] delete job error
+---
+> tsh> Job [2] (124704) terminated by signal 2
+> tsh> tsh> jobs
+> tsh> [1] (124702) Running ./myspin 4 &
+> tsh> 
+\ 文件尾没有换行符

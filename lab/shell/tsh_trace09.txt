@@ -1,0 +1,8 @@
+#
+# trace09.txt - Process bg builtin command
+#
+tsh> tsh> ./myspin 4 &
+tsh> [1] (124746) ./myspin 4 &
+
+tsh> tsh> ./myspin 5
+tsh> 

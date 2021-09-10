@@ -1,0 +1,8 @@
+#
+# trace10.txt - Process fg builtin command. 
+#
+tsh> tsh> ./myspin 4 &
+tsh> [1] (124762) ./myspin 4 &
+
+tsh> tsh> fg %1
+tsh> 

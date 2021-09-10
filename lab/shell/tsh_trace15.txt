@@ -1,0 +1,8 @@
+#
+# trace15.txt - Putting it all together
+#
+tsh> tsh> ./bogus
+tsh> ./bogus: Command not found.
+tsh> tsh> ./myspin 10
+tsh> Job [0] (124866) terminated by signal 2
+[sigint_handler] delete job error
