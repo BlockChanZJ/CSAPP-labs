@@ -6,13 +6,4 @@ do
     ./sdriver.pl -t $file -s ./tsh > tsh_$file
 done
 
-for file in $(ls trace*)
-do
-    diff tsh_$file tshref_$file > diff_$file
-done
-
-for file in $(ls diff_trace*)
-do
-    echo $file " :"
-    cat $file
-    echo -e "-------------------------------------\n"
+python3 diff.py
