@@ -1,0 +1,117 @@
+method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /csapp.c HTTP/1.1
+, method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+buf: GET /tiny.c HTTP/1.1
+, method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+buf: GET /godzilla.jpg HTTP/1.1
+, method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+buf: GET /tiny HTTP/1.1
+, method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /csapp.c HTTP/1.1
+, method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+buf: GET /tiny.c HTTP/1.1
+, method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+buf: GET /godzilla.jpg HTTP/1.1
+, method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+buf: GET /tiny HTTP/1.1
+, method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /csapp.c HTTP/1.1
+, method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+buf: GET /tiny.c HTTP/1.1
+, method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+buf: GET /godzilla.jpg HTTP/1.1
+, method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+buf: GET /tiny HTTP/1.1
+, method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /csapp.c HTTP/1.1
+, method: GET, uri: /csapp.c, version: HTTP/1.1
+uri: /csapp.c, filename: ./csapp.c, cgiargs: 
+buf: GET /tiny.c HTTP/1.1
+, method: GET, uri: /tiny.c, version: HTTP/1.1
+uri: /tiny.c, filename: ./tiny.c, cgiargs: 
+buf: GET /godzilla.jpg HTTP/1.1
+, method: GET, uri: /godzilla.jpg, version: HTTP/1.1
+uri: /godzilla.jpg, filename: ./godzilla.jpg, cgiargs: 
+buf: GET /tiny HTTP/1.1
+, method: GET, uri: /tiny, version: HTTP/1.1
+uri: /tiny, filename: ./tiny, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
+buf: GET /home.html HTTP/1.1
+, method: GET, uri: /home.html, version: HTTP/1.1
+uri: /home.html, filename: ./home.html, cgiargs: 
