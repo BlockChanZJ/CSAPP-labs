@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <strings.h>
 #include <assert.h>
+#include <netdb.h>
 
 
 #include "csapp.h"
@@ -11,12 +12,21 @@
 
 /* You won't lose style points for including this long line in your code */
 static const char *user_agent_hdr = "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3\r\n";
+static const char *conn_hdr = "Connection: Keep-Alive\r\n";
+static const char *proxy_hdr = "Proxy-Connection: Keep-Alive\r\n";
+static const char *host_hdr_format = "Host: %s\r\n";
+static const char *requestlint_hdr_format = "GET %s HTTP/1.0\r\n";
+static const char *endof_hdr = "\r\n";
 
+static const char *connection_key = "Connection";
+static const char *user_agent_key = "User-Agent";
+static const char *proxy_connection_key = "Proxy-Connection";
+static const char *host_key = "Host";
 
 void doit(int clientfd);
 void client_error(int fd, char *msg);
-void read_client_hdrs(rio_t *rp, char *hdrs);
 int parse_uri(char *uri, char *hostname, char *port, char *filename, char *cgiargs);
+void build_hdrs(char *hdrs, char *hostname, char *port, char *req_hdrs, rio_t *rio);
 
 int main(int argc, char **argv) {
     int listenfd, connfd;
@@ -37,7 +47,7 @@ int main(int argc, char **argv) {
         clientlen = sizeof(clientaddr);
         connfd = Accept(listenfd, (SA *) &clientaddr, &clientlen);
         Getnameinfo((SA *) &clientaddr, clientlen, hostname, MAXLINE, port, MAXLINE, 0);
-        printf("Accept connection from (%s, %s)\n", hostname, port);
+        printf("Accept connection from (%s, %s), connfd: %d\n", hostname, port, connfd);
         doit(connfd);
         Close(connfd);
     }
@@ -45,7 +55,7 @@ int main(int argc, char **argv) {
 }
 
 void doit(int clientfd) {
-    int is_static;
+    int is_static, n;
     struct stat sbuf;
     char buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];
     char filename[MAXLINE], cgiargs[MAXLINE], hostname[MAXLINE], port[MAXLINE];
@@ -63,45 +73,34 @@ void doit(int clientfd) {
     sscanf(buf, "%s %s %s", method, uri, version);
     is_static = parse_uri(uri, hostname, port, filename, cgiargs);
 
-    /* read client headers and construct server headers */
-    strcpy(hdrs, user_agent_hdr);
-    read_client_hdrs(&client_rio, hdrs);
 
-    /* construct request */
+    /* build headers */
     ptr = uri;
     while (strstr(ptr, "/"))
         ptr = strstr(ptr, "/") + 1;
-    sprintf(req, "%s %s %s", method, ptr - 1, version);
 
+    sprintf(req, requestlint_hdr_format, ptr - 1);
+    build_hdrs(hdrs, hostname, port, req, &client_rio);
 
-    FILE *f = fopen("qwq.txt", "a+");
-    fprintf(f, "===============CONSTRUCT=============\n");
-    fprintf(f, "REQUEST:\n");
-    fprintf(f, "%s\n", req);
-    fprintf(f, "HEADERS:\n");
-    fprintf(f, "%s\n", hdrs);
-    fclose(f);
+    printf("%s\n", hdrs);
 
     /* connect server */
     serverfd = Open_clientfd(hostname, port);
-    serverlen = sizeof(serveraddr);
-    Connect(serverfd, &serveraddr, serverlen);
+    if (serverfd < 0)
+        unix_error("connection failed!");
 
     /* send request and headers to server */
-    Rio_writen(serverfd, buf, strlen(buf));
     Rio_writen(serverfd, hdrs, strlen(hdrs));
 
-    /* receive server answer */
+
+    /* receive server answer and send to client */
     Rio_readinitb(&server_rio, serverfd);
-    Rio_readlineb(&server_rio, buf, MAXLINE);
+    while ((n = Rio_readlineb(&server_rio, buf, MAXLINE)) != 0) {
+        printf("proxy received %d bytes,then send\n", n);
+        Rio_writen(clientfd, buf, n);
+    }
 
-//    FILE *f = fopen("qwq.txt", "a+");
-//    fprintf(f, "===============RECEIVE=============\n");
-//    fprintf(f, "%s\n\n", buf);
-//    fclose(f);
-
-    /* send answer to client */
-    Rio_writen(clientfd, buf, strlen(buf));
+    Close(serverfd);
 }
 
 void client_error(int fd, char *msg) {
@@ -110,14 +109,30 @@ void client_error(int fd, char *msg) {
     Rio_writen(fd, buf, strlen(buf));
 }
 
-void read_client_hdrs(rio_t *rp, char *hdrs) {
-    char buf[MAXLINE];
-
-    Rio_readlineb(rp, buf, MAXLINE);
-    while (strcmp(buf, "\r\n")) {          //line:netp:readhdrs:checkterm
-        Rio_readlineb(rp, buf, MAXLINE);
-        strcat(hdrs, buf);
+void build_hdrs(char *hdrs, char *hostname, char *port, char *req_hdrs, rio_t *rio) {
+    char buf[MAXLINE], host_hdrs[MAXLINE], other_hdrs[MAXLINE];
+    while (Rio_readlineb(rio, buf, MAXLINE) > 0) {
+        /* EOF */
+        if (strcmp(buf, "\r\n") == 0) break;
+        if (!strncasecmp(buf, host_key, strlen(host_key))) {
+            strcpy(host_hdrs, buf);
+            continue;
+        }
+        if (!strncasecmp(buf, connection_key, strlen(connection_key)) &&
+            !strncasecmp(buf, proxy_connection_key, strlen(proxy_connection_key)) &&
+            !strncasecmp(buf, user_agent_key, strlen(user_agent_key)))
+            strcat(other_hdrs, buf);
     }
+    if (strlen(host_hdrs) == 0)
+        sprintf(host_hdrs, host_hdr_format, hostname);
+    sprintf(hdrs, "%s%s%s%s%s%s%s",
+            req_hdrs,
+            host_hdrs,
+            conn_hdr,
+            proxy_hdr,
+            user_agent_hdr,
+            other_hdrs,
+            endof_hdr);
 }
 
 int parse_uri(char *uri, char *hostname, char *port, char *filename, char *cgiargs) {
@@ -167,8 +182,3 @@ int parse_uri(char *uri, char *hostname, char *port, char *filename, char *cgiar
         return 0;
     }
 }
-
-//    FILE *f = fopen("qwq.txt", "a+");
-//    fprintf(f, "method: %s, uri: %s, version: %s\n", method, uri, version);
-//    fprintf(f, "uri: %s, filename: %s, cgiargs: %s, hostname: %s, port: %s\n", uri, filename, cgiargs, hostname, port);
-//    fclose(f);

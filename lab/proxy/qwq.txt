@@ -8,9 +8,16 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
 ===============CONSTRUCT=============
 REQUEST:
-GET /nop-file.txt HTTP/1.1
+GET /home.html HTTP/1.1
 HEADERS:
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
 User-Agent: curl/7.68.0
@@ -18,9 +25,16 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
 ===============CONSTRUCT=============
 REQUEST:
-GET /tiny.c HTTP/1.1
+GET /home.html HTTP/1.1
 HEADERS:
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
 User-Agent: curl/7.68.0
@@ -28,3 +42,312 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+000000000000000000000
+server-fd: 5
+serveraddr: (null)
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============RECEIVE=============
+GET http://localhost:15213/home.html HTTP/1.1
+
+
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
+===============CONSTRUCT=============
+REQUEST:
+GET /home.html HTTP/1.1
+HEADERS:
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 Firefox/10.0.3
+User-Agent: curl/7.68.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+BUF:
+GET http://localhost:15213/home.html HTTP/1.1
+
+server-fd: 0
